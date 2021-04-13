@@ -1,15 +1,18 @@
 package com.example.gridlistview;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,7 +21,7 @@ import java.util.ArrayList;
  * Use the {@link Fragment_ListItem#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_ListItem extends Fragment {
+public class Fragment_ListItem extends Fragment{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -29,16 +32,23 @@ public class Fragment_ListItem extends Fragment {
     private GridView gridView;
     private CustomAdapter adt;
     private ArrayList<Product> arrayList;
+    private ArrayList<Product> cartList;
     private Context ctx;
+    private Intent intent;
+    private Bundle bundle;
 
     public Fragment_ListItem() {
     }
 
-    public static Fragment_ListItem newInstance(String param1, String param2) {
+    protected Fragment_ListItem(Parcel in) {
+        mParam1 = in.readString();
+        mParam2 = in.readString();
+    }
+
+    public static Fragment_ListItem newInstance(String param1) {
         Fragment_ListItem fragment = new Fragment_ListItem();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,7 +58,6 @@ public class Fragment_ListItem extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
     }
@@ -56,29 +65,82 @@ public class Fragment_ListItem extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         ctx = inflater.getContext();
         View view = inflater.inflate(R.layout.fragment__list_item, container, false);
         arrayList = new ArrayList<>();
         ArrayList<String> ar = new ArrayList<>();
+        cartList = new ArrayList<>();
+        intent = getActivity().getIntent();
+
+        bundle = new Bundle();
+        if(intent != null){
+            bundle = intent.getBundleExtra("data");
+            if(bundle == null){
+                bundle = new Bundle();
+            }
+            if(intent.getBundleExtra("data") != null){
+                cartList = intent.getBundleExtra("data").getParcelableArrayList("cart");
+            }
+            else
+                Toast.makeText(getActivity(), "da khong con san pham truoc do, 91 frgm listitem", Toast.LENGTH_SHORT).show();
+        }
+
+
         ar.add("XL");
         ar.add("XXL");
         ar.add("L");
         ar.add("M");
         ar.add("S");
-        arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
-        arrayList.add(new Product("computer", 80, ar, R.drawable.middle_term_nhom_t5_2));
-        arrayList.add(new Product("Black Google", 80, ar, R.drawable.middle_term_nhom_t5_3));
-        arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
-        arrayList.add(new Product("Pink Google", 80, ar, R.drawable.images));
-        arrayList.add(new Product("Google", 80, ar, R.drawable.code));
-        arrayList.add(new Product("computer", 80, ar, R.drawable.computer));
-        arrayList.add(new Product("Black Google", 80, ar, R.drawable.download));
-//        arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
-//        arrayList.add(new Product("Pink Google", 80, ar, R.drawable.computer_engineer));
+        if(mParam1 == "just for you"){
+            arrayList.removeAll(arrayList);
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("computer", 80, ar, R.drawable.middle_term_nhom_t5_2));
+            arrayList.add(new Product("Black Google", 80, ar, R.drawable.middle_term_nhom_t5_3));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Pink Google", 80, ar, R.drawable.images));
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("computer", 80, ar, R.drawable.middle_term_nhom_t5_2));
+            arrayList.add(new Product("Black Google", 80, ar, R.drawable.middle_term_nhom_t5_3));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Pink Google", 80, ar, R.drawable.images));
+        }
+        else  if(mParam1 == "winter collection"){
+            arrayList.removeAll(arrayList);
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+            arrayList.add(new Product("Google", 80, ar, R.drawable.middle_term_nhom_t5_1));
+        }
+        else  if(mParam1 == "special collection"){
+            arrayList.removeAll(arrayList);
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+            arrayList.add(new Product("Yellow Google", 80, ar, R.drawable.yellow_google));
+        }
+
         gridView = view.findViewById(R.id.gridView);
-        adt = new CustomAdapter( getActivity(), R.layout.item_product, arrayList);
+        adt = new CustomAdapter(getActivity(), R.layout.item_product, arrayList);
         gridView.setAdapter(adt);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Product item = (Product) adt.getItem(position); //xài 2 cách lấy item đều dc
+                Product item = arrayList.get(position);
+                intent = new Intent(getActivity(), DetailsProduct.class);
+                bundle.putParcelable("product", item); // bắt buộc Class product phải implement Parcelable
+                bundle.putParcelableArrayList("cart", cartList);
+                intent.putExtra("data", bundle);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

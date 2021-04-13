@@ -25,12 +25,6 @@ public class CustomAdapter extends BaseAdapter {
         this.listProduct = listProduct;
     }
 
-//    public CustomAdapter(Fragment_ListItem fragment_listItem, int layout, ArrayList<Product> listProduct) {
-//        this.fragment_listItem = fragment_listItem;
-//        this.layout = layout;
-//        this.listProduct = listProduct;
-//    }
-
     @Override
     public int getCount() {
         return listProduct.size();
@@ -38,12 +32,12 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return listProduct.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override

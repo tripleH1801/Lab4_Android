@@ -14,33 +14,16 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BelowFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BelowFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
 
     public BelowFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-     * @return A new instance of fragment BelowFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BelowFragment newInstance(String param1) {
         BelowFragment fragment = new BelowFragment();
         Bundle args = new Bundle();
@@ -62,9 +45,6 @@ public class BelowFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_below, container, false);
         DecimalFormat formatter = new DecimalFormat("#.### đ");
-//        String s = mParam1.toString();
-//        int i = Integer.parseInt(s);
-//        String yourFormattedString = ;
 
         Locale currentLocale = Locale.getDefault();
         DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(currentLocale);

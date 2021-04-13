@@ -22,9 +22,7 @@ public class MainActivity extends AppCompatActivity implements SendingData{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
-        getSupportFragmentManager().beginTransaction().add(R.id.FragmentBelow, BelowFragment.newInstance("141800")).commit();
-
-
+        getSupportFragmentManager().beginTransaction().add(R.id.FragmentBelow, BelowFragment.newInstance("141800")).commit(); // hien thi fragment
     }
 
     @Override
