@@ -27,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         intent = getIntent();
-        if(intent.getBundleExtra("data")!= null)
-            Toast.makeText(this, "van con budle", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "toang", Toast.LENGTH_SHORT).show();
 
         TextView tv = findViewById(R.id.tv);
         TextView tv1 = findViewById(R.id.tv1);

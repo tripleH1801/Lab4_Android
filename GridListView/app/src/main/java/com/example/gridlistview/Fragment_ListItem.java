@@ -81,8 +81,6 @@ public class Fragment_ListItem extends Fragment{
             if(intent.getBundleExtra("data") != null){
                 cartList = intent.getBundleExtra("data").getParcelableArrayList("cart");
             }
-            else
-                Toast.makeText(getActivity(), "da khong con san pham truoc do, 91 frgm listitem", Toast.LENGTH_SHORT).show();
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.gridlistview;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -67,16 +68,21 @@ public class List_Product_InCart extends Fragment {
         listQuantity = new ArrayList<>();
         if(bundle.getIntegerArrayList("listquantity") != null){
             listQuantity = bundle.getIntegerArrayList("listquantity");
-            listQuantity.add(1);
         }
         else{
-            for (String s: listSize
-                 ) {
+            for (Product p: listProduct) {
                 listQuantity.add(1);
             }
         }
-        cartAdt = new CartAdapter(getActivity(), R.layout.item_cart, listProduct, listSize, listQuantity);
+        bundle.putIntegerArrayList("listquantity", (ArrayList<Integer>) listQuantity);
+        cartAdt = new CartAdapter(getActivity(), R.layout.fragment_items_cart, listProduct, listSize, listQuantity);
+
         listView.setAdapter(cartAdt);
         return view;
+    }
+
+    public Intent getIntentFromFragment(){
+        intent = getActivity().getIntent();
+        return intent;
     }
 }

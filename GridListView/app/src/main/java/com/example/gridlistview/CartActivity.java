@@ -69,10 +69,6 @@ public class CartActivity extends AppCompatActivity {
         tvTotal= findViewById(R.id.tvTotalPrice);
         tvTotal.setText(df.format(subPrice));
 
-//        List<Product> list = intent.getBundleExtra("data").getParcelableArrayList("cart");
-//        Product p = list.get(0);
-//        Toast.makeText(this, "day la ten product da dc chuyen den cart: "+ p.getName(), Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, "size: "+ intent.getBundleExtra("data").getStringArrayList("listsize").get(0), Toast.LENGTH_SHORT).show();
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentCartList, List_Product_InCart.newInstance("","")).commit();
         Button btnCheck = findViewById(R.id.btnCheckout);
         btnCheck.setOnClickListener(new View.OnClickListener() {
